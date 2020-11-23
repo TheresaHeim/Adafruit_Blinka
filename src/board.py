@@ -138,6 +138,7 @@ elif board_id == ap_board.DRAGONBOARD_410C:
 elif board_id == ap_board.FTDI_FT232H:
     from adafruit_blinka.board.ftdi_ft232h import *
 
+
 elif board_id == ap_board.BINHO_NOVA:
     from adafruit_blinka.board.binho_nova import *
 
@@ -167,6 +168,9 @@ elif board_id == ap_board.UDOO_X86:
 
 elif board_id == ap_board.STM32MP157C_DK2:
     from adafruit_blinka.board.stm32.stm32mp157c_dk2 import *
+
+elif board_id == ap_board.SIMATIC_IOT2050_ADVANCED:
+    from adafruit_blinka.board.siemens_iot2050_adv import *
 
 elif "sphinx" in sys.modules:
     pass
