@@ -75,7 +75,7 @@ class Pin:
 
 #Digital Pins
 
-D4 = mrra.GPIO(4) #Digital PIN 4
+D4 = mraa.GPIO(4) #Digital PIN 4
 
 D5 = mraa.GPIO(5) #Digital PIN 5
 
@@ -110,4 +110,3 @@ A3 = mraa.Aio(3) #Analog PIN 3
 #I2C
 i2cPorts = ( 
         4, "A5", "A6"), #erste Ziffer ist Bus Nummer
-)
