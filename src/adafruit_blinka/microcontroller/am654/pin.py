@@ -39,7 +39,7 @@ class Pin:
         if mode is not None:
             if mode == self.write:
                 self._mode = self.write()
-                GPIO.setup(self.id, GPIO.wrie())
+                GPIO.setup(self.id, GPIO.write())
             if mode == self.read:
                 self._mode = slef.read()
                 GPIO.setup(self.id, GPIO.read())
