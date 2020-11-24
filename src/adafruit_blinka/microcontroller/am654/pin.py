@@ -1,12 +1,12 @@
 
 "Broadcom AM654 pin names"
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import mraa
 import time
 
-GPIO.setmode(GPIO.BCM)  #Use BCM pins D4 = GPIO #4
-GPIO.setwarnings(False) #shh!
+Gpio.setmode(Gpio.BCM)  #Use BCM pins D4 = GPIO #4
+Gpio.setwarnings(False) #shh!
 
 
 class Pin: 
@@ -39,22 +39,22 @@ class Pin:
         if mode is not None:
             if mode == self.write:
                 self._mode = self.write()
-                GPIO.setup(self.id, GPIO.write())
+                Gpio.setup(self.id, Gpio.write())
             if mode == self.read:
                 self._mode = slef.read()
-                GPIO.setup(self.id, GPIO.read())
+                Gpio.setup(self.id, Gpio.read())
             elif mode == self.OUT:
                 self._mode = self.OUT
-                GPIO.setup(self.id, GPIO.OUT)
+                Gpio.setup(self.id, Gpio.OUT)
             else: 
                 raise RuntimeError("Invalid mode for pin: %s" % self.id)
         if pull is not None:
             if self._mode != self.IN:
                 raise RuntimeError("Cannot set pull resistor on output")
             if pull == self.PULL_UP:
-                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+                Gpio.setup(self.id, Gpio.IN, pull_up_down=Gpio.PUD_UP)
             elif pull == self.PULL_DOWN:
-                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+                Gpio.setup(self.id, Gpio.IN, pull_up_down=Gpio.PUD_DOWN)
             else:
                 raise RuntimeError("Invalid pull for pin: %s" % self.id)
 
@@ -63,10 +63,10 @@ class Pin:
             if val is not None:
                 if val == self.LOW:
                     self._value = val
-                    GPIO.output(self.id, val)
+                    Gpio.output(self.id, val)
                 elif val == self.HIGH:
                     self._value = val
-                    GPIO.output(self.id, val)
+                    Gpio.output(self.id, val)
                 else: 
                     raise RuntimeError("Invalid value for pin")
                 return None
@@ -75,17 +75,17 @@ class Pin:
 
 #Digital Pins
 
-D4 = mraa.GPIO(4) #Digital PIN 4
+D4 = mraa.Gpio(4) #Digital PIN 4
 
-D5 = mraa.GPIO(5) #Digital PIN 5
+D5 = mraa.Gpio(5) #Digital PIN 5
 
-D6 = mraa.GPIO(6) #Digital PIN 6
+D6 = mraa.Gpio(6) #Digital PIN 6
 
-D7 = mraa.GPIO(7) #Digital PIN 7
+D7 = mraa.Gpio(7) #Digital PIN 7
 
-D8 = mraa.GPIO(8) #Digital PIN 8
+D8 = mraa.Gpio(8) #Digital PIN 8
 
-D9 = mraa.GPIO(9) #Digital PIN 9
+D9 = mraa.Gpio(9) #Digital PIN 9
 
 #Analoge Pins
 
