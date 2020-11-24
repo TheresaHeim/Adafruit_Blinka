@@ -25,6 +25,7 @@ class Pin:
     _mode = IN
 
     def __init__(self, bcm_number):
+
         self.id = bcm_number
 
     def __repr__(self):
@@ -53,7 +54,7 @@ class Pin:
             if pull == self.PULL_UP:
                 GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_UP)
             elif pull == self.PULL_DOWN:
-                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO:PUD_DOWN)
+                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             else:
                 raise RuntimeError("Invalid pull for pin: %s" % self.id)
 
