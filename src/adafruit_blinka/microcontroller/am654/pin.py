@@ -8,6 +8,7 @@ import time
 #mraa.Gpio.setmode(mraa.Gpio.BCM)  #Use BCM pins D4 = GPIO #4
 #mraa.Gpio.setwarnings(False) #shh!
 
+
 """
 class Pin: 
     "Pins dont exist in CPython so ... lets make our own!"
@@ -71,30 +72,28 @@ class Pin:
                     raise RuntimeError("Invalid value for pin")
                 return None
             return mraa.Gpio.input(self.id)
-
+"""
 
 #Digital Pins
 
 D4 = mraa.Gpio(4) #Digital PIN 4
 D4.dir(mraa.DIR_OUT)
 
-while True:
-    D4.write(1)
-    time.sleep(1)
-    D4.write(0)
-    time.sleep(1)
+D4.write(1)
+time.sleep(1)
+D4.write(0)
+time.sleep(1)
 
-"""
+
 
 
 D5 = mraa.Gpio(5) #Digital PIN 5
 D5.dir(mraa.DIR_OUT)
 
-while True:
-    D5.write(1)
-    time.sleep(1)
-    D5.write(0)
-    time.sleep(1)
+D5.write(1)
+time.sleep(1)
+D5.write(0)
+time.sleep(1)
 
 
 
@@ -102,11 +101,10 @@ while True:
 D8 = mraa.Gpio(8) #Digital PIN 8
 D8.dir(mraa.DIR_OUT)
 
-while True:
-    D8.write(1)
-    time.sleep(1)
-    D8.write(0)
-    time.sleep(1)
+D8.write(1)
+time.sleep(1)
+D8.write(0)
+time.sleep(1)
 
 
 
@@ -114,26 +112,31 @@ while True:
 D9 = mraa.Gpio(9) #Digital PIN 9
 D9.dir(mraa.DIR_OUT)
 
-while True:
-    D9.write(1)
-    time.sleep(1)
-    D9.write(0)
-    time.sleep(1)
+D9.write(1)
+time.sleep(1)
+D9.write(0)
+time.sleep(1)
 
 
-
+"""
 #Analoge Pins
 
 A0 = mraa.Aio(0) #Analog PIN 0
 value_A0 = A0.read()
 print (value_A0)
 
-"""
 A1 = mraa.Aio(1) #Analog PIN 1
+value_A1 = A1.read()
+print (value_A1)
 
 A2 = mraa.Aio(2) #Analog PIN 2
+value_A2 = A2.read()
+print (value_A2)
 
 A3 = mraa.Aio(3) #Analog PIN 3
+value_A3 = A3.read()
+print (value_A3)
+
 
 #SPI
 #ordered as spiId, sckId, mosiID, misoID
