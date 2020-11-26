@@ -55,6 +55,13 @@ class I2C(Lockable):
             return
         if detector.board.any_embedded_linux:
             from adafruit_blinka.microcontroller.generic_linux.i2c import I2C as _I2C
+
+            self._i2c = _I2C(frequency=frequency)
+            return
+        if detector.board.siemens_iot2050_adv:
+            from adafruit_blinka.microcontroller.am654.i2c import I2C as _I2C
+
+
         else:
             from machine import I2C as _I2C
         from microcontroller.pin import i2cPorts
