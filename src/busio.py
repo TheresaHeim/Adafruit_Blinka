@@ -62,8 +62,8 @@ class I2C(Lockable):
             from adafruit_blinka.microcontroller.am654.i2c import I2C as _I2C
 
 
-        else:
-            from machine import I2C as _I2C
+       # else:
+       #     from machine import I2C as _I2C
         from microcontroller.pin import i2cPorts
 
         for portId, portScl, portSda in i2cPorts:

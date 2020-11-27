@@ -9,7 +9,7 @@ import time
 #mraa.Gpio.setwarnings(False) #shh!
 
 
-"""
+
 class Pin: 
     "Pins dont exist in CPython so ... lets make our own!"
 
@@ -35,15 +35,17 @@ class Pin:
     def __eq__(self, other):
         return self.id == other
 
-    def init(self, mode=write(), pull=None):
+    def init(self, mode=IN, pull=None):
         "Initialise the Pin"
         if mode is not None:
-            if mode == self.write:
-                self._mode = self.write()
+            if mode == self.IN:
+                self._mode = self.IN
                 mraa.Gpio.setup(self.id, mraa.Gpio.write())
-            if mode == self.read:
-                self._mode = slef.read()
+                self.dir(mraa.DIR_IN)
+            if mode == self.OUT:
+                self._mode = slef.OUT
                 mraa.Gpio.setup(self.id, mraa.Gpio.read())
+                self.dir(mraa.DIR_OUT)
             elif mode == self.OUT:
                 self._mode = self.OUT
                 mraa.Gpio.setup(self.id, mraa.Gpio.OUT)
@@ -72,20 +74,23 @@ class Pin:
                     raise RuntimeError("Invalid value for pin")
                 return None
             return mraa.Gpio.input(self.id)
-"""
+
+
+I2C_SCL = Pin(19)
+I2C_SDA = Pin(18)
 
 #Digital Pins
 
 D4 = mraa.Gpio(4) #Digital PIN 4
-D4.dir(mraa.DIR_OUT)
+#D4.dir(mraa.DIR_OUT)
 
-D4.write(1)
-time.sleep(1)
-D4.write(0)
-time.sleep(1)
+#D4.write(1)
+#time.sleep(1)
+#D4.write(0)
+#time.sleep(1)
 
 
-
+"""
 
 D5 = mraa.Gpio(5) #Digital PIN 5
 D5.dir(mraa.DIR_OUT)
@@ -117,8 +122,8 @@ time.sleep(1)
 D9.write(0)
 time.sleep(1)
 
-
 """
+
 #Analoge Pins
 
 A0 = mraa.Aio(0) #Analog PIN 0
@@ -128,7 +133,7 @@ print (value_A0)
 A1 = mraa.Aio(1) #Analog PIN 1
 value_A1 = A1.read()
 print (value_A1)
-
+"""
 A2 = mraa.Aio(2) #Analog PIN 2
 value_A2 = A2.read()
 print (value_A2)
@@ -141,13 +146,15 @@ print (value_A3)
 #SPI
 #ordered as spiId, sckId, mosiID, misoID
 
-"""
+
 
 #URAT
 # ordered as uartID, txID, rxId
 
-
+"""
 
 #I2C
-i2cPorts = ( 
-        4, "A5", "A6"), #erste Ziffer ist Bus Nummer
+i2cPorts = (4, I2C_SCL, I2C_SDA), #erste Ziffer ist Bus Nummer
+
+
+
