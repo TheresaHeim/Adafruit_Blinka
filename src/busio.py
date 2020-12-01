@@ -64,9 +64,10 @@ class I2C(Lockable):
             self._i2c = _I2C(frequency=frequency)
             return
 
-       # else:
-       #     from machine import I2C as _I2C
+        else:
+            from machine import I2C as _I2C
         from microcontroller.pin import i2cPorts
+        from adafruit_blinka.microcontroller.am654.i2c import I2C as _I2C
 
         for portId, portScl, portSda in i2cPorts:
             try:
