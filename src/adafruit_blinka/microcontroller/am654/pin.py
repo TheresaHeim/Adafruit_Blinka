@@ -145,6 +145,9 @@ value_A3 = A3.read()
 
 #SPI
 #ordered as spiId, sckId, mosiID, misoID
+spiPorts = (
+        (0, SPIO_SCLK, SPIO_MOSI, SPIO_MISO),
+)
 
 
 #URAT
