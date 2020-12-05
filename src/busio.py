@@ -183,6 +183,14 @@ class SPI(Lockable):
             return
         if detector.board.any_embedded_linux:
             from adafruit_blinka.microcontroller.generic_linux.spi import SPI as _SPI
+
+            self._spi = _SPI()
+            self._pins = (SCK, MOSI, MISO)
+            return
+        if detector.board.any_siemens_iot2000:
+            from adafruit_blinka.microcontroller.am654.spi import SPI as _SPI
+  
+
         else:
             from machine import SPI as _SPI
         from microcontroller.pin import spiPorts
@@ -356,15 +364,20 @@ class UART(Lockable):
             from adafruit_blinka.microcontroller.nova.uart import UART as _UART
         elif detector.board.greatfet_one:
             from adafruit_blinka.microcontroller.nxp_lpc4330.uart import UART as _UART
+        elif detector.board.any_siemens_iot2000:
+            from adafruit_blinka.microcontroller.am654.uart import UART as _UART
         else:
             from machine import UART as _UART
 
         if detector.board.binho_nova:
             from adafruit_blinka.microcontroller.nova.pin import uartPorts
+        if detector.board.any_siemens_iot2000:
+            from adafruit_blinka.microcontroller.am654.pin import uartPorts
         else:
             from microcontroller.pin import uartPorts
 
         self.baudrate = baudrate
+
 
         if flow is not None:  # default 0
             raise NotImplementedError(

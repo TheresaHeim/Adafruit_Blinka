@@ -79,6 +79,15 @@ class Pin:
 I2C_SCL = Pin(19)
 I2C_SDA = Pin(18)
 
+SPIO_SCLK = Pin(13)
+SPIO_MOSI = Pin(11)
+SPIO_MISO = Pin(12)
+
+UART0_TXD = Pin(1)
+UART0_RXD = Pin(0)
+
+
+
 #Digital Pins
 
 D4 = mraa.Gpio(4) #Digital PIN 4
@@ -152,7 +161,7 @@ spiPorts = (
 
 #URAT
 # ordered as uartID, txID, rxId
-
+uartPorts = ((0,UART0_TXD, UART0_RXD),)
 
 #I2C
 i2cPorts = (4, I2C_SCL, I2C_SDA), #erste Ziffer ist Bus Nummer
