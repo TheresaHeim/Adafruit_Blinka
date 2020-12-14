@@ -84,26 +84,17 @@ UART0_TXD = Pin(1)
 UART0_RXD = Pin(0)
 
 
-
 # Digital Pins
-
 D4 = mraa.Gpio(4) # Digital PIN 4
-
 D5 = mraa.Gpio(5) # Digital PIN 5
-
 D8 = mraa.Gpio(8) # Digital PIN 8
-
 D9 = mraa.Gpio(9) # Digital PIN 9
 
 
 # Analoge Pins
-
 A0 = mraa.Aio(0) # Analog PIN 0
-
 A1 = mraa.Aio(1) # Analog PIN 1
-
 A2 = mraa.Aio(2) # Analog PIN 2
-
 A3 = mraa.Aio(3) # Analog PIN 3
 
 
