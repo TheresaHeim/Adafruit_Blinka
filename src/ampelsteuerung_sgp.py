@@ -28,17 +28,17 @@ pin.D5.dir(mraa.DIR_OUT)
 pin.D8.dir(mraa.DIR_OUT)
 
 try:
-                            # schreibt 1 auf Pin D
+                            
     while True: 
         
         if (sgp30.eCO2 < 1000 and sgp30.TVOC < 5):  #Angabe der Sensorwerte in ppm
             pin.D4.write(0)
             pin.D5.write(0)
-            pin.D8.write(1)
+            pin.D8.write(1)                         # schreibt 1 auf Pin D8
             print("Die Luftqualität ist gut, es besteht kein Grund zu lüften:")
             time.sleep(3)                           #Zeitverzögerung von 3 Sekunden
 
-        if (sgp30.eCO2 >= 1000 or sgp30.TVOC >= 5):   # Angabe der Sensorwerte in ppm     
+        if (sgp30.eCO2 >= 1000 or sgp30.TVOC >= 5): # Angabe der Sensorwerte in ppm     
             pin.D5.write(0)
             pin.D8.write(0)                         
             pin.D4.write(1)                         # schreibt 1 auf Pin D4
