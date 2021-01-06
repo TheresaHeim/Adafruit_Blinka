@@ -30,27 +30,28 @@ pin.D8.dir(mraa.DIR_OUT)
 try:
                             
     while True: 
-        
-        if (sgp30.eCO2 < 1000 and sgp30.TVOC < 5):  #Angabe der Sensorwerte in ppm
+	
+        if (sgp30.eCO2 > 2000 or sgp30.TVOC > 10):  # Angabe der Sensorwerte in ppm
             pin.D4.write(0)
+            pin.D8.write(0)
+            pin.D5.write(1)                         # schreibt 1 auf Pin D5
+            print("Es muss jetzt gelüftet werden, die Luftqualtiät ist schlecht.")
+            time.sleep(3)                           # Zeitverzögerung von 3 Sekunden
+		
+        elif (sgp30.eCO2 >= 1000 or sgp30.TVOC >= 5): # Angabe der Sensorwerte in ppm
             pin.D5.write(0)
-            pin.D8.write(1)                         # schreibt 1 auf Pin D8
-            print("Die Luftqualität ist gut, es besteht kein Grund zu lüften:")
-            time.sleep(3)                           #Zeitverzögerung von 3 Sekunden
-
-        if (sgp30.eCO2 >= 1000 or sgp30.TVOC >= 5): # Angabe der Sensorwerte in ppm     
-            pin.D5.write(0)
-            pin.D8.write(0)                         
+            pin.D8.write(0)
             pin.D4.write(1)                         # schreibt 1 auf Pin D4
             print("Es sollte demnächst gelüftet werden, die Luftqualtiät hat sich verschlechtert.")
             time.sleep(3)                           # Zeitverzögerung von 3 Sekunden
 
-        if (sgp30.eCO2 > 2000 or sgp30.TVOC > 10):  # Angabe der Sensorwerte in ppm
+        
+        elif (sgp30.eCO2 < 1000 and sgp30.TVOC < 5):  #Angabe der Sensorwerte in ppm
             pin.D4.write(0)
-            pin.D8.write(0)                         
-            pin.D5.write(1)                         # schreibt 1 auf Pin D5
-            print("Es muss jetzt gelüftet werden, die Luftqualtiät ist schlecht.")
-            time.sleep(3)                           # Zeitverzögerung von 3 Sekunden
+            pin.D5.write(0)
+            pin.D8.write(1)                         # schreibt 1 auf Pin D8
+            print("Die Luftqualität ist gut, es besteht kein Grund zu lüften:")
+            time.sleep(3)                           #Zeitverzögerung von 3 Sekunden     
 
 
 except KeyboardInterrupt:                           # mit einem KeyboardInterrupt wird die while-Schleife abgebrochen
