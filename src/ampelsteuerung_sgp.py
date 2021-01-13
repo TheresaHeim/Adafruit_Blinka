@@ -50,13 +50,13 @@ try:
             pin.D4.write(0)
             pin.D5.write(0)
             pin.D8.write(1)                         # schreibt 1 auf Pin D8
-            print("Die Luftqualität ist gut, es besteht kein Grund zu lüften:")
+            print("Die Luftqualität ist gut, es besteht kein Grund zu lüften.")
             time.sleep(3)                           #Zeitverzögerung von 3 Sekunden     
 
 
 except KeyboardInterrupt:                           # mit einem KeyboardInterrupt wird die while-Schleife abgebrochen
+    pin.D4.write(0)                                 # Pin D4 wird rückgesetzt
     pin.D5.write(0)                                 # Pin D5 wird rückgesetzt
-    pin.D5.write(0)                                 # Pin D6 wird rückgesetzt
     pin.D8.write(0)                                 # Pin D8 wird rückgesetzt 
     pass                                            # Rrogramm wird unterbrochen
 
