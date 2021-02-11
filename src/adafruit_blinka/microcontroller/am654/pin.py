@@ -1,12 +1,11 @@
 
-"Broadcom AM654 pin names"
 
+"Broadcom AM654 pin names"
 import mraa
 import time
+import Adafruit_BBIO.GPIO as GPIO
 
-
-class Pin: 
-
+class Pin:
     IN = 0
     OUT = 1
     LOW = 0
@@ -19,9 +18,8 @@ class Pin:
     _value = LOW
     _mode = IN
 
-    def __init__(self, bcm_number):
-
-        self.id = bcm_number
+    def __init__(self, pin_name):
+        self.id = pin_name
 
     def __repr__(self):
         return str(self.id)
@@ -30,49 +28,42 @@ class Pin:
         return self.id == other
 
     def init(self, mode=IN, pull=None):
-        "Initialise the Pin"
-        if mode is not None:
+        if mode != None:
             if mode == self.IN:
                 self._mode = self.IN
-                mraa.Gpio.setup(self.id, mraa.Gpio.write())
-                self.dir(mraa.DIR_IN)
-            if mode == self.OUT:
-                self._mode = slef.OUT
-                mraa.Gpio.setup(self.id, mraa.Gpio.read())
-                self.dir(mraa.DIR_OUT)
+                GPIO.setup(self.id, GPIO.IN)
             elif mode == self.OUT:
                 self._mode = self.OUT
-                mraa.Gpio.setup(self.id, mraa.Gpio.OUT)
-            else: 
+                GPIO.setup(self.id, GPIO.OUT)
+            else:
                 raise RuntimeError("Invalid mode for pin: %s" % self.id)
-        if pull is not None:
+        if pull != None:
             if self._mode != self.IN:
                 raise RuntimeError("Cannot set pull resistor on output")
             if pull == self.PULL_UP:
-                mraa.Gpio.setup(self.id, mraa.Gpio.IN, pull_up_down=mraa.Gpio.PUD_UP)
+                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_UP)
             elif pull == self.PULL_DOWN:
-                mraa.Gpio.setup(self.id, mraa.Gpio.IN, pull_up_down=mraa.Gpio.PUD_DOWN)
+                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
             else:
-                raise RuntimeError("Invalid pull for pin: %s" % self.id)
+                raise RuntimeError("Invalid pull for pin: %s" % self.id)       
 
-        def value(self, val=None):
-            "Set or return the Pin Value"
-            if val is not None:
-                if val == self.LOW:
-                    self._value = val
-                    mraa.Gpio.output(self.id, val)
-                elif val == self.HIGH:
-                    self._value = val
-                    mraa.Gpio.output(self.id, val)
-                else: 
-                    raise RuntimeError("Invalid value for pin")
-                return None
-            return mraa.Gpio.input(self.id)
+    def value(self, val=None):
+        if val != None:
+            if val == self.LOW:
+                self._value = val
+                GPIO.output(self.id, val)
+            elif val == self.HIGH:
+                self._value = val
+                GPIO.output(self.id, val)
+            else:
+                raise RuntimeError("Invalid value for pin")
+        else:
+            return GPIO.input(self.id)
 
 
 # I2C Zuweisung
-I2C_SCL = Pin(19)
-I2C_SDA = Pin(18)
+I2C_SCL = "SCL"
+I2C_SDA = "SDA"
 
 # SPI Zuweisung
 SPIO_SCLK = Pin(13)
@@ -80,14 +71,17 @@ SPIO_MOSI = Pin(11)
 SPIO_MISO = Pin(12)
 
 # UART Zuweisung
-UART0_TXD = Pin(1)
-UART0_RXD = Pin(0)
+UART0_TXD = "TXD"
+UART0_RXD = "RXD"
 
 
 # Digital Pins
 D4 = mraa.Gpio(4) # Digital PIN 4
 D5 = mraa.Gpio(5) # Digital PIN 5
-D8 = mraa.Gpio(8) # Digital PIN 8
+D6 = mraa.Gpio(6) # Digital PIN 6
+D7 = mraa.Gpio(7) # Digital PIN 7
+#D8 = mraa.Gpio(8) # Digital PIN 8
+D8 = Pin("P8_13")
 D9 = mraa.Gpio(9) # Digital PIN 9
 
 
