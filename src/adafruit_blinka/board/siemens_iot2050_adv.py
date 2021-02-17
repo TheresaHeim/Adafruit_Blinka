@@ -9,7 +9,7 @@ SDA = pin.I2C_SDA
 SCLK= pin.SPIO_SCLK
 MOSI = pin.SPIO_MOSI
 MISO = pin.SPIO_MISO
-D8 = pin.D8
+D10 = pin.D10
 
 UART_TX = pin.UART0_TXD
 UART_RX = pin.UART0_RXD 

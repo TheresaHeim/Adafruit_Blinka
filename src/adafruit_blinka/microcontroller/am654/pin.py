@@ -3,7 +3,7 @@
 "Broadcom AM654 pin names"
 import mraa
 import time
-import Adafruit_BBIO.GPIO as GPIO
+
 
 class Pin:
     IN = 0
@@ -31,19 +31,23 @@ class Pin:
         if mode != None:
             if mode == self.IN:
                 self._mode = self.IN
-                GPIO.setup(self.id, GPIO.IN)
+                myPin = mraa.Gpio(self.id)
+                myPin.dir(mraa.DIR_IN)
             elif mode == self.OUT:
                 self._mode = self.OUT
-                GPIO.setup(self.id, GPIO.OUT)
+                myPin = mraa.Gpio(self.id)
+                myPin.dir(mraa.DIR_OUT)
             else:
                 raise RuntimeError("Invalid mode for pin: %s" % self.id)
         if pull != None:
             if self._mode != self.IN:
                 raise RuntimeError("Cannot set pull resistor on output")
             if pull == self.PULL_UP:
-                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+                myPin = mraa.Gpio(self.id)
+                myPin.dir(mraa.DIR_IN)
             elif pull == self.PULL_DOWN:
-                GPIO.setup(self.id, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+                myPin = mraa.Gpio(self.id)
+                myPin.dir(mraa.DIR_IN)
             else:
                 raise RuntimeError("Invalid pull for pin: %s" % self.id)       
 
@@ -51,14 +55,16 @@ class Pin:
         if val != None:
             if val == self.LOW:
                 self._value = val
-                GPIO.output(self.id, val)
+                myPin = mraa.Gpio(self.id)
+                myPin.write(0)
             elif val == self.HIGH:
                 self._value = val
-                GPIO.output(self.id, val)
+                myPin = mraa.Gpio(self.id)
+                myPin.write(1)
             else:
                 raise RuntimeError("Invalid value for pin")
         else:
-            return GPIO.input(self.id)
+            return mraa.Gpio.read(self.id)
 
 
 # I2C Zuweisung
@@ -67,8 +73,9 @@ I2C_SDA = "SDA"
 
 # SPI Zuweisung
 SPIO_SCLK = Pin(13)
-SPIO_MOSI = Pin(11)
 SPIO_MISO = Pin(12)
+SPIO_MOSI = Pin(11)
+
 
 # UART Zuweisung
 UART0_TXD = "TXD"
@@ -76,14 +83,13 @@ UART0_RXD = "RXD"
 
 
 # Digital Pins
-D4 = mraa.Gpio(4) # Digital PIN 4
-D5 = mraa.Gpio(5) # Digital PIN 5
-D6 = mraa.Gpio(6) # Digital PIN 6
-D7 = mraa.Gpio(7) # Digital PIN 7
-#D8 = mraa.Gpio(8) # Digital PIN 8
-D8 = Pin("P8_13")
-D9 = mraa.Gpio(9) # Digital PIN 9
-
+D4 = Pin(4) # Digital PIN 4
+D5 = Pin(5) # Digital PIN 5
+D6 = Pin(6) # Digital PIN 6
+D7 = Pin(7) # Digital PIN 7
+D8 = Pin(8) # Digital PIN 8
+D9 = Pin(9) # Digital PIN 9
+D10 = Pin(10) # Digital PIN 10
 
 # Analoge Pins
 A0 = mraa.Aio(0) # Analog PIN 0

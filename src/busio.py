@@ -276,6 +276,9 @@ class SPI(Lockable):
         elif board_id == ap_board.ONION_OMEGA2:
             from adafruit_blinka.microcontroller.mips24kec.pin import Pin
             from adafruit_blinka.microcontroller.generic_linux.spi import SPI as _SPI
+        elif detector.board.any_siemens_iot2000:
+            from adafruit_blinka.microcontroller.am654.spi import SPI as _SPI
+            from adafruit_blinka.microcontroller.am654.pin import Pin
         else:
             from machine import SPI as _SPI
             from machine import Pin
