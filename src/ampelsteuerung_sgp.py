@@ -45,13 +45,13 @@ try:
 	
         if (sgp30.eCO2 > 2000 or sgp30.TVOC > 10):    # Angabe der Sensorwerte in ppm
             LED4.value(LOW)
-            LED5.value(HIGH)                          # schreibt 1 auf Pin D5
+            LED5.value(HIGH)                          # LED D5 soll leuchten 
             LED8.value(LOW)                  
             print("Es muss jetzt gelüftet werden, die Luftqualtiät ist schlecht.")
             time.sleep(3)                             # Zeitverzögerung von 3 Sekunden
 		
         elif (sgp30.eCO2 >= 1000 or sgp30.TVOC >= 5): # Angabe der Sensorwerte in ppm
-            LED4.value(HIGH)                          # schreibt 1 auf Pin D4
+            LED4.value(HIGH)                          # LED D4 soll leuchten
             LED5.value(LOW)
             LED8.value(LOW)                
             print("Es sollte demnächst gelüftet werden, die Luftqualtiät hat sich verschlechtert.")
@@ -60,7 +60,7 @@ try:
         elif (sgp30.eCO2 < 1000 and sgp30.TVOC < 5):  #Angabe der Sensorwerte in ppm
             LED4.value(LOW)
             LED5.value(LOW)
-            LED8.value(HIGH)                          # schreibt 1 auf Pin D8                      
+            LED8.value(HIGH)                          # LED D8 soll leuchten                     
             print("Die Luftqualität ist gut, es besteht kein Grund zu lüften.")
             time.sleep(3)                             #Zeitverzögerung von 3 Sekunden     
 
